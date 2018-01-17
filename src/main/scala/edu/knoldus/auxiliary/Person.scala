@@ -20,8 +20,7 @@ class Operations {
 
       def playGame(times: Int, value: Int): String = {
         value match {
-          case `one` => if (times == 3) "Won" else playGame(times + 1, Random.nextInt(six))
-          case `six` => if (times == 3) "Won" else playGame(times + 1, Random.nextInt(six))
+          case `one`|`six` => if (times == 3) "Won" else playGame(times + 1, Random.nextInt(six))
           case _ => "Lost"
         }
       }
@@ -41,15 +40,24 @@ class Operations {
   case class Blogger(name: String, blogList: Map[String, Int]) extends Person(name) {
 
     override def personTask(): String = {
-      val maxTuple:(String, Int) = blogList.maxBy(_._2)
-      s"Favourite Blog of $name is ${maxTuple._1}. Number of blogs written is ${maxTuple._2}"
+      val newBlogList = blogList.map { case (k, v) => (k, v + Random.nextInt(six)) }
+      val maximum: (String, Int) = newBlogList.maxBy(_._2)
+      s"Updated Blog List : ${newBlogList}\nFavourite Blog of $name is  ${maximum._1} \nNumber of posts : ${maximum._2}"
     }
   }
+
 }
 
 object Operations extends App {
   val obj = new Operations
+  val initialMap = Map("Scala" -> 2, "Java" -> 5, "Kafka" -> 6)
   val log = Logger.getLogger(this.getClass)
-  val trainer = obj.Trainer("Sudeep James Tirkey")
+  val gamer = obj.Gamer("Sudeep James Tirkey")
+  val trainer = obj.Trainer("Vinay Kumar")
+  val blogger = obj.Blogger("Bruce Schneier", initialMap)
+  log.info(gamer.personTask())
+  log.info("\n\n")
   log.info(trainer.personTask())
+  log.info("\n\n")
+  log.info(blogger.personTask())
 }

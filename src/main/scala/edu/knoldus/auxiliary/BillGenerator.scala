@@ -30,4 +30,10 @@ object BillGenerator extends App {
   val log = Logger.getLogger(this.getClass)
   log.info("\nUsing PayTM\n")
   log.info(s"${obj.printBill(obj.Paytm(billAmount))}")
+  log.info("\nUsing Net Banking\n")
+  log.info(s"${obj.printBill(obj.NetBanking(billAmount))}")
+  log.info("\nUsing Card Payment\n")
+  log.info(s"${obj.printBill(obj.CardPayment(billAmount))}")
+  log.info("\nUsing Cash\n")
+  log.info(s"${obj.printBill(obj.Cash(billAmount))}")
 }
