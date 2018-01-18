@@ -26,7 +26,7 @@ class BillGenerator {
 
 object BillGenerator extends App {
   val obj = new BillGenerator
-  val billAmount: Double = 100
+  val billAmount: Double = 105
   val log = Logger.getLogger(this.getClass)
   log.info("\nUsing PayTM\n")
   log.info(s"${obj.printBill(obj.Paytm(billAmount))}")
